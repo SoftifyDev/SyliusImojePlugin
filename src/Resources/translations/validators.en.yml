@@ -1,0 +1,11 @@
+softify:
+    imoje_plugin:
+        gateway_configuration:
+            authorization_token:
+                not_blank: The Authorization token has not been provided.
+            merchant_id:
+                not_blank: The Merchant ID key code has not been provided.
+            service_id:
+                not_blank: The Service ID code has not been provided.
+            service_key:
+                not_blank: The Service KEY code has not been provided.

@@ -1,0 +1,19 @@
+softify:
+  imoje_plugin:
+    environment: Środowisko
+    production: Produkcyjne
+    sandbox: Testowe
+    gateway_label: Imoje
+    debug_mode: Tryb diagnostyczny
+    authorization_token: Token autoryzacyjny
+    merchant_id: Identyfikator klienta
+    service_id: Identyfikator sklepu
+    service_key: Klucz sklepu
+    errors:
+      400: Błędne żądanie, niepoprawny payload żądania.
+      401: Nieautoryzowany dostęp. Żądanie zasobu, który wymaga uwierzytelnienia.
+      403: Brak uprawnień do wykonania żądania.
+      404: Nieznany zasób.
+      422: Payload jest poprawny ale nie zawiera wymaganaych parametrów.
+      500: Błąd serwera.
+      503: System niedostępny.

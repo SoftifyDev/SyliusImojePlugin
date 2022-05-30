@@ -1,0 +1,19 @@
+softify:
+  imoje_plugin:
+    environment: Environment
+    production: Production
+    sandbox: Test
+    gateway_label: Imoje
+    debug_mode: Debug mode
+    authorization_token: Authorization token
+    merchant_id: Merchant ID
+    service_id: Service ID
+    service_key: Service KEY
+    errors:
+      400: Wrong request, incorrect request payload.
+      401: Unauthorised access. The requested resource requires authentication.
+      403: No authorisation to execute the request.
+      404: Unknown resource.
+      422: Payload is correct, but does not contain the required parameters.
+      500: Server error.
+      503: System inaccessible.

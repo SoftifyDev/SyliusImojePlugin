@@ -1,0 +1,4 @@
+imoje_notify_do_unsafe:
+  path: /payment/notify/unsafe/{gateway}
+  defaults:
+    _controller: Softify\SyliusImojePlugin\Controller\UnsafeNotifyController::doUnsafeAction

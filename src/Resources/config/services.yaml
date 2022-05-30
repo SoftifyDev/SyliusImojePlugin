@@ -1,0 +1,61 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Softify\SyliusImojePlugin\:
+    resource: '../../../src/*'
+    exclude: '../../../src/{Entity,Migrations,Tests,Kernel.php}'
+
+  softify.imoje_plugin.gateway_factory:
+    class: Payum\Core\Bridge\Symfony\Builder\GatewayFactoryBuilder
+    arguments: [ Softify\SyliusImojePlugin\ImojeGatewayFactory ]
+    tags:
+      - { name: payum.gateway_factory_builder, factory: imoje }
+
+  Softify\SyliusImojePlugin\Form\Type\ImojeGatewayConfigurationType:
+    tags:
+      - { name: sylius.gateway_configuration_type, type: imoje, label: 'softify.imoje_plugin.gateway_label' }
+      - { name: form.type }
+
+  softify.imoje_plugin.action.capture:
+    class: Softify\SyliusImojePlugin\Action\CaptureAction
+    public: true
+    tags:
+      - { name: payum.action, factory: imoje, alias: payum.action.capture }
+
+  softify.imoje_plugin.action.notify:
+    class: Softify\SyliusImojePlugin\Action\NotifyAction
+    public: true
+    tags:
+      - { name: payum.action, factory: imoje, alias: payum.action.notify }
+
+  softify.imoje_plugin.action.status:
+    class: Softify\SyliusImojePlugin\Action\StatusAction
+    public: true
+    tags:
+      - { name: payum.action, factory: imoje, alias: payum.action.status }
+
+  softify.imoje_plugin.action.convert_payment:
+    class: Softify\SyliusImojePlugin\Action\ConvertPaymentAction
+    public: true
+    tags:
+      - { name: payum.action, factory: imoje, alias: payum.action.convert_payment }
+
+  Softify\SyliusImojePlugin\Serializer\IntDenormalize:
+    arguments:
+      - '@Symfony\Component\Serializer\Normalizer\ObjectNormalizer'
+    tags:
+      - { name: serializer.denormalizer }
+
+
+  Softify\SyliusImojePlugin\Service\ImojePaymentService:
+    arguments:
+      - '@sylius.http_client'
+
+  Softify\SyliusImojePlugin\ProcessManager\RefundPaymentProcessManager:
+    tags:
+      - { name: sylius_refund.units_refunded.process_step, priority: 200 }
+
+

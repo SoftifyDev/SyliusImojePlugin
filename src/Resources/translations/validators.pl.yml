@@ -1,0 +1,11 @@
+softify:
+    imoje_plugin:
+        gateway_configuration:
+            authorization_token:
+                not_blank: Nie podano Tokenu autoryzacyjnego.
+            merchant_id:
+                not_blank: Nie podano Identyfikatora klienta.
+            service_id:
+                not_blank: Nie podano Identyfikatora sklepu.
+            service_key:
+                not_blank: Nie podano Klucza sklepu.
