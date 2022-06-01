@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Softify\SyliusImojePlugin\DependencyInjection;
 
-use Payum\Core\Exception\LogicException;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -26,36 +25,6 @@ class Configuration implements ConfigurationInterface
                         "127.0.0.1"
                     ])
                     ->scalarPrototype()->end()
-                ->end()
-                ->scalarNode('order_model_class')
-                    ->cannotBeEmpty()
-                    ->validate()
-                        ->ifTrue(function($value) {
-                            if (false === class_exists($value)) {
-                                throw new LogicException(sprintf(
-                                    'The storage entry must be a valid model class. It is set %s',
-                                    $value
-                                ));
-                            }
-                            return false;
-                        })
-                        ->thenInvalid('A message')
-                    ->end()
-                ->end()
-                ->scalarNode('payment_security_token_model_class')
-                    ->cannotBeEmpty()
-                    ->validate()
-                        ->ifTrue(function($value) {
-                            if (false === class_exists($value)) {
-                                throw new LogicException(sprintf(
-                                    'The storage entry must be a valid model class. It is set %s',
-                                    $value
-                                ));
-                            }
-                            return false;
-                        })
-                        ->thenInvalid('A message')
-                    ->end()
                 ->end()
             ->end();
 

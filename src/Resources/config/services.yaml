@@ -58,12 +58,17 @@ services:
 
   softify.imoje_plugin.service.token_factory:
     class: Softify\SyliusImojePlugin\Service\TokenFactoryFromRequestService
+    arguments:
+      $securityTokenRepository: '@sylius.repository.payment_security_token'
+      $orderRepository: '@sylius.repository.order'
 
   Softify\SyliusImojePlugin\Controller\UnsafeNotifyController:
     arguments:
       - '@softify.imoje_plugin.service.token_factory'
 
   Softify\SyliusImojePlugin\ProcessManager\RefundPaymentProcessManager:
+    arguments:
+      $orderRepository: '@sylius.repository.order'
     tags:
       - { name: sylius_refund.units_refunded.process_step, priority: 200 }
 
