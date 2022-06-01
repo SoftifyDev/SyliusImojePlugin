@@ -22,12 +22,16 @@ services:
   softify.imoje_plugin.action.capture:
     class: Softify\SyliusImojePlugin\Action\CaptureAction
     public: true
+    arguments:
+      - '@softify.imoje_plugin.service.imoje_payment'
     tags:
       - { name: payum.action, factory: imoje, alias: payum.action.capture }
 
   softify.imoje_plugin.action.notify:
     class: Softify\SyliusImojePlugin\Action\NotifyAction
     public: true
+    arguments:
+      - '@softify.imoje_plugin.service.imoje_payment'
     tags:
       - { name: payum.action, factory: imoje, alias: payum.action.notify }
 
@@ -49,10 +53,15 @@ services:
     tags:
       - { name: serializer.denormalizer }
 
+  softify.imoje_plugin.service.imoje_payment:
+    class: Softify\SyliusImojePlugin\Service\ImojePaymentService
 
-  Softify\SyliusImojePlugin\Service\ImojePaymentService:
+  softify.imoje_plugin.service.token_factory:
+    class: Softify\SyliusImojePlugin\Service\TokenFactoryFromRequestService
+
+  Softify\SyliusImojePlugin\Controller\UnsafeNotifyController:
     arguments:
-      - '@sylius.http_client'
+      - '@softify.imoje_plugin.service.token_factory'
 
   Softify\SyliusImojePlugin\ProcessManager\RefundPaymentProcessManager:
     tags:

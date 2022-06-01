@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class TokenFactoryFromRequestService
+class TokenFactoryFromRequestService implements TokenFactoryFromRequestServiceInterface
 {
     public function __construct(
         private SerializerInterface $serializer,

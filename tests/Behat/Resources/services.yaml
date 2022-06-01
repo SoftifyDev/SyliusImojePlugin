@@ -1,0 +1,17 @@
+imports:
+  - services/contexts/contexts.yaml
+  - services/pages/page.yaml
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+
+  softify.imoje_plugin.mocker.imoje_api:
+    class: Tests\Softify\SyliusImojePlugin\Behat\Mocker\ImojeApiMocker
+    public: true
+    arguments:
+      - '@sylius.behat.mocker'
+      - '@sylius.repository.payment_security_token'

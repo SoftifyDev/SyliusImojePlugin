@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Softify\SyliusImojePlugin\Service;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use JetBrains\PhpStorm\ArrayShape;
@@ -27,9 +28,11 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 class ImojePaymentService implements ImojePaymentServiceInterface
 {
     protected ApiInterface $api;
+    protected ClientInterface $client;
 
-    public function __construct(protected ClientInterface $client, private SerializerInterface $serializer)
+    public function __construct(protected SerializerInterface $serializer)
     {
+        $this->client = new Client();
     }
 
     public function setAuthorizationData(ApiInterface $api): void

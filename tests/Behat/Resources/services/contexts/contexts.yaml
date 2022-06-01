@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  softify.imoje_plugin.context.setup.imoje:
+    class: Tests\Softify\SyliusImojePlugin\Behat\Context\Setup\ImojeContext
+    arguments:
+      - '@sylius.behat.shared_storage'
+      - '@sylius.repository.payment_method'
+      - '@sylius.fixture.example_factory.payment_method'
+      - '@sylius.manager.payment_method'
+
+  softify.imoje_plugin.context.ui.imoje:
+    class: Tests\Softify\SyliusImojePlugin\Behat\Context\Ui\ImojeContext
+    arguments:
+      - '@softify.imoje_plugin.mocker.imoje_api'
+      - '@sylius.behat.page.shop.order.show'
+      - '@sylius.behat.page.shop.checkout.complete'
+      - '@softify.imoje_plugin.page_checkout.external'
+

@@ -9,14 +9,14 @@ use Payum\Core\GatewayInterface;
 use Payum\Core\Request\Notify;
 use Payum\Core\Security\TokenInterface;
 use Softify\SyliusImojePlugin\ImojeGatewayFactory;
-use Softify\SyliusImojePlugin\Service\TokenFactoryFromRequestService;
+use Softify\SyliusImojePlugin\Service\TokenFactoryFromRequestServiceInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 final class UnsafeNotifyController extends NotifyController
 {
-    public function __construct(private TokenFactoryFromRequestService $tokenFactoryFromRequestService){
+    public function __construct(private TokenFactoryFromRequestServiceInterface $tokenFactoryFromRequestService){
     }
 
     public function doUnsafeAction(Request $request): Response

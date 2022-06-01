@@ -1,0 +1,12 @@
+services:
+  softify.imoje_plugin.page.external:
+    class: Tests\Softify\SyliusImojePlugin\Behat\Mocker\ImojeApiMocker
+    arguments:
+      - '@sylius.behat.mocker'
+
+  softify.imoje_plugin.page_checkout.external:
+    class: Tests\Softify\SyliusImojePlugin\Behat\Page\External\ImojeCheckoutPage
+    parent: 'sylius.behat.page'
+    public: true
+    arguments:
+      $securityTokenRepository: '@sylius.repository.payment_security_token'
