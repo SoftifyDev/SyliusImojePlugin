@@ -80,7 +80,9 @@ jobs:
         run: composer require "sylius/sylius:${{ matrix.sylius }}" --no-update --no-scripts --no-interaction
 
       - name: Install PHP dependencies
-        run: composer install --no-interaction --no-scripts
+        run: | 
+          composer install --no-interaction --no-scripts
+          composer require sylius/refund-plugin "^1.2"
 
       - name: Prepare test application database
         run: |
@@ -101,4 +103,4 @@ jobs:
 
       - name: Run Behat
         run: vendor/bin/behat --colors --strict -vvv --no-interaction || vendor/bin/behat --colors --strict -vvv --no-interaction --rerun
-      
+
