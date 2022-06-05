@@ -66,10 +66,4 @@ services:
     arguments:
       - '@softify.imoje_plugin.service.token_factory'
 
-  Softify\SyliusImojePlugin\ProcessManager\RefundPaymentProcessManager:
-    arguments:
-      $orderRepository: '@sylius.repository.order'
-    tags:
-      - { name: sylius_refund.units_refunded.process_step, priority: -200 }
-
 

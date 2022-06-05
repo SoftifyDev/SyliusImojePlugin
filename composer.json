@@ -17,10 +17,12 @@
         "php": "^8.0",
         "guzzlehttp/guzzle": "^6.0 || ^7.0",
         "payum/payum-bundle": "^2.4",
-        "sylius/refund-plugin": "^1.2",
         "sylius/sylius": "^1.11",
         "symfony/http-foundation": "^4.4 || ^5.1 || ^6.0",
         "symfony/serializer": "^4.4 || ^5.1 || ^6.0"
+    },
+    "suggest": {
+        "sylius/refund-plugin": "^1.2"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

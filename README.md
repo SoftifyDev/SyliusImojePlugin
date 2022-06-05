@@ -26,7 +26,7 @@ The plugin integrates <a href="https://www.imoje.pl/">Imoje</a> payments with Sy
 3. Add plugin routing to main configuration
 
 ```bash
-imoje_shop:
+imoje_plugin_shop:
     resource: "@SoftifySyliusImojePlugin/Resources/config/shop_routing.yml"
 ```
 
