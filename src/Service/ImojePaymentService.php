@@ -12,6 +12,7 @@ use Payum\Core\Request\Capture;
 use Payum\Core\Security\TokenInterface;
 use Softify\SyliusImojePlugin\Api\ApiInterface;
 use Softify\SyliusImojePlugin\Serializer\IntDenormalize;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -170,8 +171,26 @@ class ImojePaymentService implements ImojePaymentServiceInterface
         $order = $payment->getOrder();
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
+        /** @var AddressInterface $billingAddress */
+        $billingAddress = $order->getBillingAddress();
         /** @var TokenInterface $token */
         $token = $request->getToken();
+
+        if ($order->isCreatedByGuest()) {
+            $customerDto =
+                (new CustomerDto())
+                    ->setFirstName($billingAddress->getFirstName())
+                    ->setLastName($billingAddress->getLastName())
+                    ->setEmail($customer->getEmail())
+                    ->setPhone($customer->getPhoneNumber() ?: '');
+        } else {
+            $customerDto =
+                (new CustomerDto())
+                    ->setFirstName($customer->getFirstName())
+                    ->setLastName($customer->getLastName())
+                    ->setEmail($customer->getEmail())
+                    ->setPhone($billingAddress->getPhoneNumber() ?: '');
+        }
 
         $paymentDto = new PaymentDto();
         $paymentDto
@@ -182,13 +201,8 @@ class ImojePaymentService implements ImojePaymentServiceInterface
             ->setReturnUrl($token->getTargetUrl())
             ->setSuccessReturnUrl($token->getTargetUrl())
             ->setFailureReturnUrl($token->getTargetUrl())
-            ->setCustomer(
-                (new CustomerDto())
-                    ->setFirstName($customer->getFirstName())
-                    ->setLastName($customer->getLastName())
-                    ->setEmail($customer->getEmail())
-                    ->setPhone($customer->getPhoneNumber() ?: '')
-            );
+            ->setCustomer($customerDto);
+
         return $paymentDto;
     }
 }
