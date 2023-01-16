@@ -9,6 +9,7 @@ softify:
     merchant_id: Identyfikator klienta
     service_id: Identyfikator sklepu
     service_key: Klucz sklepu
+    invalidate_capture_token: Usuń Capture Token
     errors:
       400: Błędne żądanie, niepoprawny payload żądania.
       401: Nieautoryzowany dostęp. Żądanie zasobu, który wymaga uwierzytelnienia.

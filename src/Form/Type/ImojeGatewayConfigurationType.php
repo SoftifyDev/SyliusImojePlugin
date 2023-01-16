@@ -94,6 +94,13 @@ final class ImojeGatewayConfigurationType extends AbstractType
                         ),
                     ],
                 ]
+            )
+            ->add(
+                'invalidate_capture_token',
+                CheckboxType::class,
+                [
+                    'label' => 'softify.imoje_plugin.invalidate_capture_token',
+                ]
             );
     }
 }

@@ -32,4 +32,5 @@ interface ApiInterface
     public function getServiceId(): string;
     public function getServiceKey(): string;
     public function isDebugMode(): bool;
+    public function invalidateCaptureToken(): bool;
 }

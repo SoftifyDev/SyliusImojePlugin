@@ -43,15 +43,22 @@ final class CaptureAction implements ActionInterface, ApiAwareInterface, Generic
 
                 $model['paymentId'] = $response->getPayment()->getId();
                 $model['notifyTokenHash'] = $notifyToken->getHash();
+                $model['paymentUrl'] = $response->getPayment()->getUrl();
                 $request->setModel($model);
 
-                throw new HttpRedirect($response->getPayment()->getUrl());
+                throw new HttpRedirect($model['paymentUrl']);
             }
         } else {
+            $token = $request->getToken();
             $response = $this->imojePaymentService->retrievePayment((string)$model['paymentId']);
             if ($response->getCode() === 200) {
                 $model['statusImoje'] = $response->getPayment()->getStatus();
                 $request->setModel($model);
+                if ($model['statusImoje'] === ApiInterface::STATUS_NEW) {
+                    throw new HttpRedirect($model['paymentUrl']);
+                } elseif (!$this->api->invalidateCaptureToken()) {
+                    throw new HttpRedirect($token->getAfterUrl());
+                }
                 return;
             }
         }

@@ -28,6 +28,7 @@ final class ImojeGatewayFactory extends GatewayFactory
                 'merchant_id' => '',
                 'service_id' => '',
                 'service_key' => '',
+                'invalidate_capture_token' => true
             ];
             $config->defaults($config['payum.default_options']);
 
@@ -43,6 +44,7 @@ final class ImojeGatewayFactory extends GatewayFactory
                     $config['service_id'],
                     $config['service_key'],
                     $config['debug_mode'],
+                    $config['invalidate_capture_token']
                 );
             };
         }

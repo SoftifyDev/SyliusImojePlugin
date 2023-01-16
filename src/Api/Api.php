@@ -12,7 +12,8 @@ final class Api implements ApiInterface
         private string $merchantId,
         private string $serviceId,
         private string $serviceKey,
-        private bool $debugMode = false
+        private bool $debugMode = false,
+        private bool $invalidateCaptureToken = true
     ) {
     }
 
@@ -44,5 +45,10 @@ final class Api implements ApiInterface
     public function isDebugMode(): bool
     {
         return $this->debugMode;
+    }
+
+    public function invalidateCaptureToken(): bool
+    {
+        return $this->invalidateCaptureToken;
     }
 }

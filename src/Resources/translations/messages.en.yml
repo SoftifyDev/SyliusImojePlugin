@@ -9,6 +9,7 @@ softify:
     merchant_id: Merchant ID
     service_id: Service ID
     service_key: Service KEY
+    invalidate_capture_token: Invalidate Capture Token
     errors:
       400: Wrong request, incorrect request payload.
       401: Unauthorised access. The requested resource requires authentication.
