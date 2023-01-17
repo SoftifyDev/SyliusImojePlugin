@@ -47,6 +47,12 @@ services:
     tags:
       - { name: payum.action, factory: imoje, alias: payum.action.convert_payment }
 
+  softify.imoje_plugin.action.payment_details:
+    class: Softify\SyliusImojePlugin\Action\PaymentDetailsAction
+    public: true
+    tags:
+      - { name: payum.action, factory: imoje, alias: payum.action.payment_details }
+
   Softify\SyliusImojePlugin\Serializer\IntDenormalize:
     arguments:
       - '@Symfony\Component\Serializer\Normalizer\ObjectNormalizer'
